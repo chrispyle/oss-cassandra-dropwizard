@@ -1,10 +1,10 @@
 ![Logo](https://www.clearcapital.com/wp-content/uploads/2015/02/Clear-Capital@2x.png)
-# Cassandra Helpers
+# Cassandra/DropWizard
 
 ## What is it?
 
 A little glue between
-(oss-cassandra-helpers)[../oss-cassandra-helpers/README.md] and
+[oss-cassandra-helpers](http://github.com/clearcapital/oss-cassandra-helpers/README.md) and
 DropWizard.
 
 Specifically, we provide here a predefined command for doing schema
