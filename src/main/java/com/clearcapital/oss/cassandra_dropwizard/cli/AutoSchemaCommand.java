@@ -40,13 +40,16 @@ public class AutoSchemaCommand<T extends Configuration> extends ConfiguredComman
         super.configure(subparser);
         subparser.addArgument("-d", "--dry-run").action(Arguments.storeTrue()).dest("dry-run")
                 .help("Generate CQL, but do not execute it. Otherwise, generate CQL and execute it.");
-        subparser.addArgument("-k", "--kill-schemas-first").action(Arguments.storeTrue()).dest("kill-schemas-first")
-                .help("Completely kill pre-existing schema first.");
+        
+        subparser.addArgument("-k", "--kill-first").action(Arguments.storeTrue()).dest("kill-first")
+                .help("Completely kill pre-existing schema first [WIPE DATABASE] [DANGER! DANGER!].");
+        
         subparser
                 .addArgument("--drop-columns")
                 .type(String.class)
                 .nargs("+")
                 .help("Columns to drop, {table}.{column} syntax. Will only drop columns which are listed here, AND which are superfluous according to the code.");
+
         subparser
                 .addArgument("--drop-tables")
                 .type(String.class)
@@ -70,6 +73,7 @@ public class AutoSchemaCommand<T extends Configuration> extends ConfiguredComman
         configBuilder.setDryRun(namespace.getBoolean("dry-run"));
         configBuilder.setDropColumns(ImmutableSet.<String> copyOf(dropColumns));
         configBuilder.setDropTables(ImmutableSet.<String> copyOf(dropTables));
+        configBuilder.setKillFirst(namespace.getBoolean("kill-first"));
 
         // Hand off to oss-cassandra-helpers
         CassandraTableProcessor.schemaComparator(ImmediateCommandExecutor.getInstance(),
