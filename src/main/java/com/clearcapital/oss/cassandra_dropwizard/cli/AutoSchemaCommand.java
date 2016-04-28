@@ -40,21 +40,15 @@ public class AutoSchemaCommand<T extends Configuration> extends ConfiguredComman
         super.configure(subparser);
         subparser.addArgument("-d", "--dry-run").action(Arguments.storeTrue()).dest("dry-run")
                 .help("Generate CQL, but do not execute it. Otherwise, generate CQL and execute it.");
-        
+
         subparser.addArgument("-k", "--kill-first").action(Arguments.storeTrue()).dest("kill-first")
                 .help("Completely kill pre-existing schema first [WIPE DATABASE] [DANGER! DANGER!].");
-        
-        subparser
-                .addArgument("--drop-columns")
-                .type(String.class)
-                .nargs("+")
-                .help("Columns to drop, {table}.{column} syntax. Will only drop columns which are listed here, AND which are superfluous according to the code.");
 
-        subparser
-                .addArgument("--drop-tables")
-                .type(String.class)
-                .nargs("+")
-                .help("Tables to drop. Will only drop tables which are listed here, AND which are superfluous according to the code.");
+        subparser.addArgument("--drop-columns").type(String.class).nargs("+").help(
+                "Columns to drop, {table}.{column} syntax. Will only drop columns which are listed here, AND which are superfluous according to the code.");
+
+        subparser.addArgument("--drop-tables").type(String.class).nargs("+").help(
+                "Tables to drop. Will only drop tables which are listed here, AND which are superfluous according to the code.");
     }
 
     @Override
@@ -76,8 +70,10 @@ public class AutoSchemaCommand<T extends Configuration> extends ConfiguredComman
         configBuilder.setKillFirst(namespace.getBoolean("kill-first"));
 
         // Hand off to oss-cassandra-helpers
-        CassandraTableProcessor.schemaComparator(ImmediateCommandExecutor.getInstance(),
-                new MultiRingClientManager(config.getMultiRingConfiguration()), configBuilder.build()).compare();
+        CassandraTableProcessor
+                .schemaComparator(ImmediateCommandExecutor.getInstance(),
+                        new MultiRingClientManager(config.getMultiRingConfiguration()), configBuilder.build())
+                .compare();
 
         return 0;
     }
