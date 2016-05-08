@@ -6,13 +6,13 @@
   <artifactId>oss-cassandra-dropwizard</artifactId>
   <name>oss-http-client</name>
   <description>Open Source Cassandra/DropWizard Classes</description>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.0.2-SNAPSHOT</version>
   <packaging>jar</packaging>
 
   <properties>
     <project.name>${project.groupId}.${project.artifactId}</project.name>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <version.cc-oss-cassandra-helpers>0.0.1-SNAPSHOT</version.cc-oss-cassandra-helpers>
+    <version.cc-oss-cassandra-helpers>0.0.2-SNAPSHOT</version.cc-oss-cassandra-helpers>
     <version.cc-oss-commands>0.0.1-SNAPSHOT</version.cc-oss-commands>
     <version.cc-oss-dropwizard-helpers>0.0.1-SNAPSHOT</version.cc-oss-dropwizard-helpers>
     <version.cc-oss-java-helpers>0.0.1-SNAPSHOT</version.cc-oss-java-helpers>
